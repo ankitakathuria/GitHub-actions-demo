@@ -11,5 +11,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Print Hello
-        run: echo "Hello from Github Actions!"
+      - name: Show Current Directory
+        run: pwd
+
+      - name: List Files
+        run: ls -la
+
+      - name: Show Node Version
+        run: node -v 
+
+      - name: Run Javascript File
+        run: node index.js
