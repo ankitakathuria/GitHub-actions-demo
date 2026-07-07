@@ -1,24 +1,50 @@
-name: My first Workflow
+name: Node CI Demo
 
 on: 
   push:
 
 jobs: 
-  first-job:
+  node-demo:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Show Current Directory
-        run: pwd
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 22
 
-      - name: List Files
-        run: ls -la
+      - name: Verify Node Version
+        run: node -v
 
-      - name: Show Node Version
-        run: node -v 
+      - name: Run Start Script
+        run: npm run start
+         
 
-      - name: Run Javascript File
-        run: node index.js
+
+# name: My first Workflow
+
+# on: 
+#   push:
+
+# jobs: 
+#   first-job:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v4
+
+#       - name: Show Current Directory
+#         run: pwd
+
+#       - name: List Files
+#         run: ls -la
+
+#       - name: Show Node Ve rsion
+#         run: node -v 
+
+#       - name: Run Javascript File
+#         run: node index.js
