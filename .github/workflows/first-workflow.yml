@@ -1,53 +1,22 @@
-name: Node CI Demo
+name: Multiple Jobs Demo
 
 on: 
   push:
 
-jobs: 
-  node-demo:
+jobs:
+  first-job: 
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+     - name: First Job
+       run: echo "I ama the first Job"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with: 
-          node-version: 22
+  second-job:
+    runs-on: ubuntu-latest
 
-      - name: Verify Node Version
-        run: node -v
-
-      - name: Run Start Script
-        run: npm run start
-
-      - name: Install Dependencies
-        run: npm ci
-         
+    steps:
+      - name: Second Job
+        run: echo "I am the second Job"
 
 
-# name: My first Workflow
-
-# on: 
-#   push:
-
-# jobs: 
-#   first-job:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v4
-
-#       - name: Show Current Directory
-#         run: pwd
-
-#       - name: List Files
-#         run: ls -la
-
-#       - name: Show Node Ve rsion
-#         run: node -v 
-
-#       - name: Run Javascript File
-#         run: node index.js
+  
