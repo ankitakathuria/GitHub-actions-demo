@@ -1,0 +1,39 @@
+name: resusable-build
+
+on:
+  workflow_call:
+    inputs: 
+      node-version:
+        required: true
+        type: number
+
+jobs:
+  build:  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        runs: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{inputs.node-version}}
+          cache: npm
+      
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Upload Atrifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: dist-files
+          path: dist/
+
+      

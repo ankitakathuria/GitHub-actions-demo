@@ -1,0 +1,11 @@
+name: Main CI
+
+on: 
+  push:
+
+jobs:
+  build:
+    uses: ./github/workflows/reusable-build.yml
+
+    with:
+      node-version: 24
