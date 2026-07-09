@@ -1,26 +1,34 @@
-name: Multiple Jobs Demo
+name: my-test-workflow
 
-on: 
+on:
   push:
 
 jobs:
-  first-job: 
+  first-job:
     runs-on: ubuntu-latest
 
     steps:
-     - name: First Job
-       run:  |
-          echo "I ama the first Job"
-          sleep 10
-          echo "First Job Completed"
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-  second-job:
-    needs: first-job
-    runs-on: ubuntu-latest
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 24
+          cache: npm 
 
-    steps:
-      - name: Second Job
-        run: echo "I am the second Job"
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm run test
+
+      - name: Build Project
+        uses: actions/upload-artifact@v4
+        with: 
+          path: dist/
 
 
-  
+
+
+    
